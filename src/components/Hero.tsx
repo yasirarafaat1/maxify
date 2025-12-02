@@ -1,13 +1,38 @@
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 const Hero = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if mobile view
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
+  const handleWhatsAppRedirect = () => {
+    const phoneNumber = "+917355553093";
+    const message = "Hello, I would like to schedule a consultation.";
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
-    <section id="home" className="min-h-screen flex items-center pt-20 relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center pt-32 pb-5 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsl(263_70%_50%_/_0.15),_transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_hsl(320_80%_55%_/_0.1),_transparent_50%)]" />
-      
+
       {/* Floating Orbs */}
       <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float" style={{ animationDelay: "1.5s" }} />
@@ -26,18 +51,19 @@ const Hero = () => {
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            We craft data-driven strategies that amplify your online presence, 
+            We craft data-driven strategies that amplify your online presence,
             drive engagement, and deliver measurable results for your business growth.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            <Button size="lg" className="gradient-bg hover:opacity-90 transition-opacity group px-8">
-              Start Your Journey
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button size="lg" variant="outline" className="group">
-              <Play className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
-              Watch Our Story
+            <Button
+              size="lg"
+              className={`bg-green-500 transition-all group px-8 py-6 text-lg font-bold ${isMobile ? '' : 'hover:bg-green-600 transform hover:scale-105 hover:shadow-xl'}`}
+              onClick={handleWhatsAppRedirect}
+            >
+              <Zap className="mr-2 h-5 w-5" />
+              Chat Now
+              <ArrowRight className={`ml-2 h-5 w-5 ${isMobile ? '' : 'group-hover:translate-x-1'} transition-transform`} />
             </Button>
           </div>
 

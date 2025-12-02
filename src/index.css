@@ -16,6 +16,7 @@
     --popover-foreground: 220 20% 10%;
 
     --primary: 209 90% 50%;
+    /* #1684e9 */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 15% 95%;
@@ -24,7 +25,8 @@
     --muted: 220 15% 95%;
     --muted-foreground: 220 10% 45%;
 
-    --accent: 358 99% 60%;
+    --accent: 350 98% 57%;
+    /* #fe2234 */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -36,7 +38,7 @@
 
     --radius: 0.75rem;
 
-    --gradient-primary: linear-gradient(135deg, hsl(209 90% 50%), hsl(358 99% 60%));
+    --gradient-primary: linear-gradient(135deg, hsl(209 90% 50%), hsl(350 98% 57%));
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -59,6 +61,7 @@
     --popover-foreground: 0 0% 98%;
 
     --primary: 209 90% 55%;
+    /* #1684e9 */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 20% 15%;
@@ -67,7 +70,8 @@
     --muted: 220 20% 15%;
     --muted-foreground: 220 10% 60%;
 
-    --accent: 358 99% 60%;
+    --accent: 350 98% 60%;
+    /* #fe2234 */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
@@ -97,7 +101,12 @@
     @apply bg-background text-foreground font-body antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading;
   }
 }

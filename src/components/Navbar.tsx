@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import {
@@ -15,11 +15,36 @@ const serviceLinks = [
   { name: "Web Development", href: "/services/web-development" },
   { name: "Meta Ads", href: "/services/meta-ads" },
   { name: "Google Ads", href: "/services/google-ads" },
+  { name: "Social Media Management", href: "/services/social-media-management" },
+  { name: "YouTube Ads", href: "/services/youtube-ads" },
+  { name: "GMB Listing", href: "/services/gmb-listing" },
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
+  const handleWhatsAppRedirect = () => {
+    const phoneNumber = "+917355553093"; // Updated with correct phone number
+    const message = "Hello, I would like to know more about your services.";
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
@@ -32,12 +57,16 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors font-medium">
+            <Link to="/" className={`text-muted-foreground font-medium ${isMobile ? '' : 'hover:text-foreground transition-colors'}`}>
               Home
             </Link>
-            
+
+            <Link to="/about" className={`text-muted-foreground font-medium ${isMobile ? '' : 'hover:text-foreground transition-colors'}`}>
+              About
+            </Link>
+
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors font-medium">
+              <DropdownMenuTrigger className={`flex items-center gap-1 text-muted-foreground font-medium ${isMobile ? '' : 'hover:text-foreground transition-colors'}`}>
                 Services <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-card border-border">
@@ -51,17 +80,16 @@ const Navbar = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors font-medium">
-              About
-            </Link>
-            <Link to="/contact" className="text-muted-foreground hover:text-foreground transition-colors font-medium">
+            <Link to="/contact" className={`text-muted-foreground font-medium ${isMobile ? '' : 'hover:text-foreground transition-colors'}`}>
               Contact
             </Link>
-            <Link to="/contact">
-              <Button className="gradient-bg hover:opacity-90 transition-opacity">
-                Get Started
-              </Button>
-            </Link>
+            <Button
+              onClick={handleWhatsAppRedirect}
+              className={`bg-green-500 text-white flex items-center gap-2 ${isMobile ? '' : 'hover:bg-green-600'}`}
+            >
+              <MessageCircle size={18} />
+              Chat on WhatsApp
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -78,15 +106,24 @@ const Navbar = () => {
           <div className="md:hidden py-4 border-t border-border/50">
             <Link
               to="/"
-              className="block py-3 text-muted-foreground hover:text-foreground transition-colors"
+              className={`block py-3 text-muted-foreground ${isMobile ? '' : 'hover:text-foreground transition-colors'}`}
               onClick={() => setIsOpen(false)}
             >
               Home
             </Link>
-            
+
+
+            <Link
+              to="/about"
+              className={`block py-3 text-muted-foreground ${isMobile ? '' : 'hover:text-foreground transition-colors'}`}
+              onClick={() => setIsOpen(false)}
+            >
+              About
+            </Link>
+
             <div>
               <button
-                className="flex items-center justify-between w-full py-3 text-muted-foreground hover:text-foreground transition-colors"
+                className={`flex items-center justify-between w-full py-3 text-muted-foreground ${isMobile ? '' : 'hover:text-foreground transition-colors'}`}
                 onClick={() => setServicesOpen(!servicesOpen)}
               >
                 Services <ChevronDown className={`h-4 w-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
@@ -97,7 +134,7 @@ const Navbar = () => {
                     <Link
                       key={link.name}
                       to={link.href}
-                      className="block py-2 text-muted-foreground hover:text-foreground transition-colors"
+                      className={`block py-2 text-muted-foreground ${isMobile ? '' : 'hover:text-foreground transition-colors'}`}
                       onClick={() => setIsOpen(false)}
                     >
                       {link.name}
@@ -108,22 +145,22 @@ const Navbar = () => {
             </div>
 
             <Link
-              to="/about"
-              className="block py-3 text-muted-foreground hover:text-foreground transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              About
-            </Link>
-            <Link
               to="/contact"
-              className="block py-3 text-muted-foreground hover:text-foreground transition-colors"
+              className={`block py-3 text-muted-foreground ${isMobile ? '' : 'hover:text-foreground transition-colors'}`}
               onClick={() => setIsOpen(false)}
             >
               Contact
             </Link>
-            <Link to="/contact" onClick={() => setIsOpen(false)}>
-              <Button className="w-full mt-4 gradient-bg">Get Started</Button>
-            </Link>
+            <Button
+              onClick={() => {
+                handleWhatsAppRedirect();
+                setIsOpen(false);
+              }}
+              className={`w-full mt-4 bg-green-500 text-white flex items-center gap-2 ${isMobile ? '' : 'hover:bg-green-600'}`}
+            >
+              <MessageCircle size={18} />
+              Chat on WhatsApp
+            </Button>
           </div>
         )}
       </div>

@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import About from "@/components/About";
 import { CheckCircle2, Award, Users, Globe, TrendingUp } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const stats = [
   { icon: Users, value: "500+", label: "Happy Clients" },
@@ -18,21 +19,36 @@ const team = [
 ];
 
 const AboutPage = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="pt-32 pb-16 relative">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(209_90%_50%_/_0.1),_transparent_50%)]" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-3xl mx-auto">
-            <span className="text-primary font-medium">About Us</span>
+            {/* <span className="text-primary font-medium">About Us</span> */}
             <h1 className="text-4xl md:text-6xl font-heading font-bold mt-2 mb-6">
               We're <span className="gradient-text">Maxify Global</span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              A team of passionate digital marketers dedicated to helping businesses 
+              A team of passionate digital marketers dedicated to helping businesses
               grow and succeed in the digital landscape.
             </p>
           </div>
@@ -68,7 +84,7 @@ const AboutPage = () => {
               Meet the <span className="gradient-text">Experts</span>
             </h2>
             <p className="text-muted-foreground">
-              Our talented team brings together years of experience in digital marketing, 
+              Our talented team brings together years of experience in digital marketing,
               technology, and creative strategy.
             </p>
           </div>
@@ -77,12 +93,12 @@ const AboutPage = () => {
             {team.map((member) => (
               <div key={member.name} className="text-center group">
                 <div className="relative mb-4 overflow-hidden rounded-2xl">
-                  <img 
-                    src={member.image} 
+                  <img
+                    src={member.image}
                     alt={member.name}
-                    className="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-500"
+                    className={`w-full aspect-square object-cover transition-transform duration-500 ${isMobile ? '' : 'group-hover:scale-110'}`}
                   />
-                  <div className="absolute inset-0 gradient-bg opacity-0 group-hover:opacity-20 transition-opacity" />
+                  <div className={`absolute inset-0 gradient-bg transition-opacity ${isMobile ? 'opacity-0' : 'opacity-0 group-hover:opacity-20'}`} />
                 </div>
                 <h3 className="font-heading font-semibold text-lg">{member.name}</h3>
                 <p className="text-muted-foreground">{member.role}</p>
@@ -102,8 +118,8 @@ const AboutPage = () => {
                 Driving Digital <span className="gradient-text">Success</span>
               </h2>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                At Maxify Global, our mission is to empower businesses of all sizes to achieve 
-                their full potential in the digital world. We believe that every brand deserves 
+                At Maxify Global, our mission is to empower businesses of all sizes to achieve
+                their full potential in the digital world. We believe that every brand deserves
                 a powerful online presence.
               </p>
               <ul className="space-y-3">
@@ -122,7 +138,7 @@ const AboutPage = () => {
             </div>
             <div className="relative">
               <div className="absolute inset-0 gradient-bg opacity-10 rounded-3xl blur-3xl" />
-              <img 
+              <img
                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
                 alt="Team collaboration"
                 className="relative rounded-3xl shadow-2xl"
