@@ -43,7 +43,7 @@ const About = () => {
   return (
     <section id="about" className="py-10 relative overflow-hidden">
       {/* Background Accent */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-[radial-gradient(ellipse_at_center,_hsl(263_70%_50%_/_0.08),_transparent_60%)]" />
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/30" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">

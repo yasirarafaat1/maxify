@@ -37,7 +37,7 @@ const WebDevelopmentPage = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-r mt-10 from-blue-50 to-indigo-50">
+      <section className="py-16 mt-10 bg-secondary/30">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>

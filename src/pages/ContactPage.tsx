@@ -32,7 +32,7 @@ const ContactPage = () => {
 
       {/* Hero Section */}
       <section className="pt-32 pb-16 relative">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(209_90%_50%_/_0.1),_transparent_50%)]" />
+        <div className="absolute inset-0 bg-secondary/30" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-heading font-bold mt-2 mb-6">

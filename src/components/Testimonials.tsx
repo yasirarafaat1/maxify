@@ -106,7 +106,7 @@ const Testimonials = () => {
   return (
     <section className="py-10 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(263_70%_50%_/_0.05),_transparent_70%)]" />
+      <div className="absolute inset-0 bg-secondary/30" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-16">

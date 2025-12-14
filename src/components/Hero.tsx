@@ -32,6 +32,7 @@ const Hero = () => {
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsl(263_70%_50%_/_0.15),_transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_hsl(320_80%_55%_/_0.1),_transparent_50%)]" />
+      <div className="absolute inset-0 bg-secondary/30" />
 
       {/* Floating Orbs */}
       <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-float" />
